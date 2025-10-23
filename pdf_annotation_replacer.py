@@ -1,6 +1,6 @@
 import pymupdf  # PyMuPDF, install with: pip install pymupdf
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, simpledialog
 import os
 
 def replace_text_in_annotations(pdf_path, old_text, new_text):
@@ -66,13 +66,13 @@ if __name__ == "__main__":
         print(f"  - {path}")
     
     # Step 2: Let user type the text to replace (applied to all PDFs)
-    old_text = input("Enter the text to find and replace: ").strip()
+    old_text = simpledialog.askstring("Text to Find", "Enter the text to find and replace:", parent=root).strip()
     if not old_text:
         messagebox.showerror("Error", "No search text provided. Exiting.")
         exit()
     
     # Step 3: Let user type the replacement text (applied to all PDFs)
-    new_text = input("Enter the replacement text: ").strip()
+    new_text = simpledialog.askstring("Replacement Text", "Enter the replacement text:", parent=root).strip()
     
     # Process each PDF
     total_modified = 0
@@ -103,4 +103,4 @@ if __name__ == "__main__":
         messagebox.showerror("Error", f"An error occurred during processing: {str(e)}")
         print(f"Error: {str(e)}")
     
-    input("Press Enter to exit...")  # Pause to see output
+    messagebox.showinfo("Complete", "Processing complete! Check the console for details.")
